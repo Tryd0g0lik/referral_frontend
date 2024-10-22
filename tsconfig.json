@@ -11,7 +11,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "jsx": "react-jsx",
+    // "jsx": "react-jsx",
     "noImplicitAny": true,
     "module": "ES6",
     "target": "ES2020",
@@ -46,10 +46,7 @@
   "exclude": [
     "./node_modules/**/*.js",
     "*.config.js",
-    "**/dist",
     "package.json",
-    "*eslintrc.*",
-    "src/backend",
     "*/**/*.json",
   ],
   "include": [

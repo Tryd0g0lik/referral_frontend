@@ -2,29 +2,57 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
-// const { merge } = require("webpack-merge");
 const BundleTracker = require('webpack-bundle-tracker');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
-// const CopyPlugin = require("copy-webpack-plugin");
-// const webpackFront = require("./src/frontend/webpack.config.js");
-
-// module.exports = webpackFront, {
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 module.exports = {
   entry: './src/index.ts',
   mode: 'none',
   output: {
-    path: path.resolve(__dirname, '../referral/static/scripts'), // '../static'
-    filename: 'main-[id]-[hash].js',
+    path: path.resolve(__dirname, '../referral/static'), // '../static'
+    filename: 'scripts/main-[id]-[fullhash].js',
     publicPath: '/',
     clean: true
   },
   target: 'web',
   module: {
     rules: [
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            minimize: {
+              removeComments: false, // Не удалять комментарии
+              collapseWhitespace: false, // Не сворачивать пробелы
+            },
+          },
+        },
+      },
+      // {
+      //   test: /\.(sa|sc|c)ss$/,
+      //   use: [
+      //     'style-loader',
+      //     'css-loader',
+      //     'sass-loader'
+      //   ],
+      // },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 }
+          },
+          'postcss-loader',
+
+        ],
+
+      },
       {
         test: /\.(tsx|jsx|ts|js)$/,
         use: [
@@ -36,46 +64,77 @@ module.exports = {
           },
         ],
         exclude: [
-          path.resolve(__dirname, "node_modules"),
+          path.resolve(__dirname, "node_modules")
         ]
-
       },
 
     ]
   },
 
   plugins: [
-    new Dotenv(),
+    new Dotenv({
+      path: ".env"
+    }),
     new CleanWebpackPlugin(),
-    new ManifestPlugin({
+    new WebpackManifestPlugin({
       fileName: 'manifest.json',
-      publicPath: '/static/scripts/',
-      writeToFileEmit: true,
+      publicPath: '/',
+      writeToFileEmit: true
     }),
     new BundleTracker({
       path: path.join(__dirname, 'src/bundles'),
       filename: 'webpack-stats.json'
     }),
 
-    new SpriteLoaderPlugin(), // svg
-
     new HtmlWebpackPlugin({
-      template: 'src/public/index.html' //'../templates/index.html'
+      template: 'src/public/index.html',
+      filename: '../templates/index.html',
     }),
-    new webpack.SourceMapDevToolPlugin({
-      test: /\.tsx?$/,
-      filename: './dist/maps/[file].map.[query]',
-      include: path.resolve(__dirname, 'src/'),
+    new HtmlWebpackPlugin({
+      template: 'src/public/users/login.html',
+      filename: '../templates/users/login.html'
     }),
+    new HtmlWebpackPlugin({
+      template: 'src/public/users/register.html',
+      filename: '../templates/users/register.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/public/users/password_change.html',
+      filename: '../templates/users/password_change.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/public/users/profile_change.html',
+      filename: '../templates/users/profile_change.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/public/users/profile_delete.html',
+      filename: '../templates/users/profile_delete.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/public/users/referral_code.html',
+      filename: '../templates/users/rreferral_code.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/public/users/register.html',
+      filename: '../templates/users/register.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/public/layout/basis.html',
+      filename: '../templates/layout/basis.html'
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles/style.css'
+    }),
+    // new webpack.SourceMapDevToolPlugin({
+    //   test: /\.tsx?$/,
+    //   filename: '../referral/maps/[file].map.[query]',
+    //   include: path.resolve(__dirname, 'src/'),
+    // }),
 
     new ESLintPlugin({
-      files: path.resolve(__dirname, 'src'),
+      files: path.resolve(__dirname, 'src')
 
     }),
-
-    // new MiniCssExtractPlugin({
-    //   filename: 'css/style.css'
-    // }),
   ],
   watchOptions: {
     ignored: [
@@ -85,40 +144,26 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'dist/frontend'), // '../static'
+      directory: path.resolve(__dirname, '../referral/static'),
 
     },
     watchFiles: [
-      'dist',
+      'scripts',
     ],
-    hot: true, // Включение горячей перезагрузки
-    liveReload: true, // Включение live-reload
-
-    // comarticle: true,
+    hot: true,
+    liveReload: true,
     historyApiFallback: true
-    // open: true, // Автоматическое открытие браузера
-    // port: 8080
   },
 
   resolve: {
-    extensions: [".tsx", ".jsx", ".ts", ".js", ".svg"],
+    extensions: [".tsx", ".jsx", ".ts", ".js"],
     plugins: [new TsconfigPathsPlugin(),],
     modules: [
       path.resolve(__dirname, "./.browserslistrc"),
-      path.resolve(__dirname, "node_modules"),
-      path.resolve(__dirname, "dist")
+      path.resolve(__dirname, "node_modules")
     ],
 
     alias: {
-      "@Interfaces": [
-        path.resolve(__dirname, "src/interfaces.ts")
-      ],
-      "@Components": [
-        path.resolve(__dirname, "./src/components")
-      ],
-      "@Services": [
-        path.resolve(__dirname, "./src/services")
-      ],
     }
   },
 

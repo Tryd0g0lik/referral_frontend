@@ -43,7 +43,7 @@ module.exports = {
       "error",
       'ignorePackages',
       {
-        "ts": "never",
+        "ts": "never"
 
       }
     ],
@@ -108,7 +108,7 @@ module.exports = {
     "package.json",
     ".eslintrc.js",
     "monyes/src/**/interfaces.ts",
-    "monyes/src/index.ts",
+    "monyes/src/index.ts"
 
   ],
 
