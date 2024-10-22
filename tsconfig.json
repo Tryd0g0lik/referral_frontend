@@ -1,0 +1,58 @@
+// https://www.typescriptlang.org/tsconfig
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "noImplicitAny": true,
+    "module": "ES6",
+    "target": "ES2020",
+    "rootDirs": [
+      "./src"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "strictNullChecks": true,
+    // "noImplicitReturns": true,
+    // "noUnusedLocals": false,
+    // "allowSyntheticDefaultImports": true,
+    // "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    // "strict": true,
+    // "noImplicitAny": true,
+    // "strictPropertyInitialization": false,
+    // "skipLibCheck": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      // "@Interfaces": [
+      //   "./src/interfaces.ts"
+      // ],
+    }
+  },
+  "exclude": [
+    "./node_modules/**/*.js",
+    "*.config.js",
+    "**/dist",
+    "package.json",
+    "*eslintrc.*",
+    "src/backend",
+    "*/**/*.json",
+  ],
+  "include": [
+    "src/**/*",
+  ]
+}
