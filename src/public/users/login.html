@@ -41,10 +41,13 @@ current_user._UserLogin__user.firstname %}
       {% endfor %}
     </div>
     {{ form.submit() }}
+    <div><input class="btn btn-secondary" id="submit-repeat" name="submit" type="submit" value="Повторить токен"
+        wfd-id="id3"></div>
   </form>
 </div>
+{% endif %}
 {% if message and message != None %}
 <div class="form-message">{{ message }}</div>
 {% endif %}
-{% endif %}
+
 {% endblock mainRowContribute %}

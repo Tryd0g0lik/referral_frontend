@@ -115,6 +115,10 @@ module.exports = {
       filename: '../templates/users/rreferral_code.html'
     }),
     new HtmlWebpackPlugin({
+      template: 'src/public/users/token_repeat.html',
+      filename: '../templates/users/token_repeat.html'
+    }),
+    new HtmlWebpackPlugin({
       template: 'src/public/users/register.html',
       filename: '../templates/users/register.html'
     }),
@@ -152,7 +156,8 @@ module.exports = {
     ],
     hot: true,
     liveReload: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    port: 5001
   },
 
   resolve: {
