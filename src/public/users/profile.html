@@ -9,7 +9,12 @@
   <ul>
     {% for r in contain %}
     <li class="reff-view" data-num="{{ r.id }}">
-      <a href="{{ r.referral_code }}"> {{ r.description}}</a>
+      <div>
+        <b>{{ r.description}}:</b>
+      </div>
+      <div>
+        <a href="{{ web_host }}/{{ r.referral_code }}">{{ web_host }}/{{ r.referral_code}}</a>
+      </div>
     </li>
     {% endfor %}
   </ul>

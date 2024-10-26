@@ -6,5 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //   запросить "/repeat_token" и все. Даьше заработает код python из
   //   "referral/views_more/views_account.py"
   //   */
-  sessionStorage.clear()
+  // sessionStorage.clear()
+  console.log("Hallo world!")
 })
