@@ -1,3 +1,3 @@
 import "./styles/style.css"
-import "./sripts/listener.ts"
+import "./scripts/listener.ts"
 console.log("Hallo world!");

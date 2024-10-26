@@ -29,4 +29,4 @@
 - `referral\templates`;
 - `referral\static` из '`referral`'
 
-Note: Для работы с JS `[JS-файлами](src/sripts)
+Note: Для работы с JS `[JS-файлами](src/scripts)
