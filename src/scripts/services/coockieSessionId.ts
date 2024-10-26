@@ -91,7 +91,7 @@ export async function checkerCookieKey(): Promise<boolean> {
 /**
  * cookie Installing
  */
-function setCookie(name: string, value: string, options: CookieOptions = {}): void {
+export function setCookie(name: string, value: string, options: CookieOptions = {}): void {
 
   options = {
     path: '/',

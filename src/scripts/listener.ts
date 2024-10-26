@@ -1,4 +1,4 @@
-import { checkCookieExists } from "./services/coockieSessionId"
+import { add } from "./services/fetches";
 
 
 
@@ -9,10 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
   //   */
   // sessionStorage.clear()
   // const cookie = checkCookieExists('user_token')
-  // console.log(`Hallo world!: ${cookie}`)
-  const cookie_arr = location.href.split('resp_cookie');
-  const cookie_leng = cookie_arr.length;
+  // console.log(`Hallo world!: ${cookie}`) /token/get
+  const cookie_arr = location.href.split('data_number=');
+  if (cookie_arr.length <= 1) {
+    return false
+  }
+  const dataNumberStr = (cookie_arr[1] as string)
+  if (dataNumberStr && Number(dataNumberStr)) {
+    const body_ = { data_number: Number(dataNumberStr) }
+    add(
+      JSON.stringify(body_), "/api/v1/token/get")
+  }
+  // setCookie('user_token, ')
 
-  const cook_str = (cookie_arr[cookie_leng - 1] as string).slice(1,)
-  console.log("ddddddddd" + cook_str)
+
+  console.log("ddddddddd" + dataNumberStr)
 })
