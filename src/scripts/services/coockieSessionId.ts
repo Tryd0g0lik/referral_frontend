@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { CookieOptions } from '@Interfaces';
+import { CookieOptions } from '@Interfaces'
 const env = process.env.REACT_APP_POSTGRES_HOST;
 const REACT_APP_POSTGRES_HOST = (env) ? env : "localhost";
 /**

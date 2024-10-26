@@ -173,6 +173,9 @@ module.exports = {
     ],
 
     alias: {
+      "@Interfaces": [
+        path.resolve(__dirname, "./src/interfaces.ts")
+      ],
     }
   },
 

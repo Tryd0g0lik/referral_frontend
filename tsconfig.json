@@ -38,9 +38,9 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      // "@Interfaces": [
-      //   "./src/interfaces.ts"
-      // ],
+      "@Interfaces": [
+        "./src/interfaces.ts"
+      ],
     }
   },
   "exclude": [
