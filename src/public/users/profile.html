@@ -2,3 +2,21 @@
 
 {% block title %}{{ title }}{% endblock title %}
 {% block header %} {{ title }} {% endblock header %}
+{% block mainRowContribute %}
+{% if contain %}
+<h2> Реферальный код </h2>
+<div class="reff">
+  <ul>
+    {% for r in contain %}
+    <li class="reff-view" data-num="{{ r.id }}">
+      <a href="{{ r.referral_code }}"> {{ r.description}}</a>
+    </li>
+    {% endfor %}
+  </ul>
+
+</div>
+{% else %}
+<div class="reff">Список пус</div>
+{% endif %}
+<div class="form-message">{{ message }}</div>
+{% endblock mainRowContribute %}

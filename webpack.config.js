@@ -126,6 +126,10 @@ module.exports = {
       template: 'src/public/layout/basis.html',
       filename: '../templates/layout/basis.html'
     }),
+    new HtmlWebpackPlugin({
+      template: 'src/public/users/profile.html',
+      filename: '../templates/users/profile.html'
+    }),
     new MiniCssExtractPlugin({
       filename: 'styles/style.css'
     }),
